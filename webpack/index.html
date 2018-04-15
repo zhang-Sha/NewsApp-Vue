@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1, minimum-scale=1, initial-scale=1">
+	<title>index</title>
+	<style>
+	body{display:none;}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<component v-bind:is="view" ></component>
+		<div id="footer">
+			<ul>
+				<!-- <li v-for="(item,index) in tab_bar" :class="ison" v-if="view === ">
+					<a :href="item.url">
+						<img :src=" 'icons/'+item.icon"><span>{{item.title}}</span>
+					</a>
+				</li> -->
+				<li><a href="#/home"><i></i><span>看法</span></a></li>
+				<li><a href="#/videos"><i></i><span>视频</span></a></li>
+				<li><a href="#/alive"><i></i><span>直播</span></a></li>
+				<li><a href="#/mine"><i></i><span>我的</span></a></li>
+			</ul>
+		</div>
+	</div>
+	<template id="home_tpl">
+		<div class="common" id="home">
+			<h1>看法</h1>
+			<div class="carousel" id="carousel">
+				<ul class="bd">
+					
+					<li v-for="(item,index) in focus" :key="index">
+						<a :href="item.url">
+						<img :src="item.image" alt=""><p>{{item.title}}</p>
+						</a>
+					</li>
+					
+				</ul>
+				<ul class="hd">
+					<li v-for="(item,index) in focus" :key="index" :class="{on:!index}"></li>
+				</ul>
+			</div>
+			<ul class="list">
+				<li v-for="item in data">
+					<a :href="item.url">
+						<img class="fr" :src="item.image" alt="">
+						<div class="cont">
+							<p class="title">{{item.title}}</p>
+							<span class="time">{{item.pub_time}}</span>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</template>
+	<template class="common" id="video_tpl">
+		<div class="common" id="video">
+			<h1>视频</h1>
+			<div class="classical">
+				<h2>精选</h2>
+				<div class="nav">
+					<ul @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend">
+						<li v-for="item in classical">
+							<img :src="item.cover_img" alt="">
+							<p>{{item.title}}</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="video-list">
+				<h2>最热</h2>
+				<ul class="list" @click="play">
+					<li v-for="(item,index) in data">
+						<video :src="item.video_source" :data-id="index" :poster="item.image"></video>
+						<span class="view">{{item.views}}</span>
+						<p class="title">{{item.title}}</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</template>
+	<template class="common" id="alive_tpl">
+		<div class="common" id="alive">
+			<h1>直播</h1>
+			<div class="acrousel_view" id="carousel2">
+				<ul class="bd clear">
+					<li v-for="item in focus">
+						<img :src="item.image" alt="">
+						<p>{{item.title}}</p>
+					</li>
+				</ul>
+			</div>
+			<div class="alive_view">
+				<div class="view_box">
+					<div class="title clear">
+						<a href="">
+						<h2>{{this.now_title}}</h2>
+						<span class="sub">{{this.now_subtitle}}</span>
+						<span class="arror fr"><span class="arror white"></span></span>
+						</a>
+					</div>
+					<ul class="cont clear">
+						<li class="fl" v-for="item in now">
+							<div class="img">
+								<img :src="item.cover_img" alt="">
+								<span class="sign">直播中</span>
+							</div>
+							<p class="name">{{item.title}}</p>
+							<p class="court">{{item.court_name}}</p>
+						</li>
+					</ul>
+				</div> 
+			</div>
+			<div class="alive_view">
+				<div class="view_box">
+					<div class="title clear">
+						<a href="">
+						<h2>{{this.back_title}}</h2>
+						<span class="sub"></span>
+						<span class="arror fr"><span class="arror white"></span></span>
+						</a>
+					</div>
+					<ul class="cont clear">
+						<li class="fl" v-for="item in back">
+							<div class="img">
+								<img :src="item.cover_img" alt="">
+								<span class="sign sign2">回顾</span>
+							</div>
+							<p class="name">{{item.title}}</p>
+							<p class="court">{{item.court_name}}</p>
+						</li>
+					</ul>
+				</div> 
+			</div>
+		</div>
+	</template>
+	<template class="common" id="mine_tpl">
+		<div class="common" id="mine">
+			<h1>我的</h1>
+			<div class="header">
+				<img src="/icons/head.jpeg" alt="">
+				<div class="right">
+				<p class="name">张莎</p>
+				<a href="">个人信息 ></a>
+				</div>
+			</div>
+		</div>
+	</template>
+<!-- <script src="static/lib/sea.js"></script>
+<script src="static/lib/seajs-css.js"></script>
+<script src="static/lib/seajs-preload.js"></script> -->
+<script src="public/main.js"></script>
+<!-- <script>
+ 	seajs.config({
+ 		base:'./static',
+ 		preload:['lib/vue.js','lib/jquery-1.12.2.js','lib/TouchSlide.1.1.js']
+ 	})
+ 	//引入入口文件，入口文件不需要模块化
+ 	seajs.use(['router/router','reset.css'])
+	
+ </script>-->
+</body>
+</html>
